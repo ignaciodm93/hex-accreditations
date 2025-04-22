@@ -4,8 +4,8 @@ import com.challenge.ms.hex_accreditations.application.domain.model.Accreditatio
 
 import reactor.core.publisher.Mono;
 
-public interface GetAccreditationUseCase {
+public interface SaveAccreditationInputPort {
 
-	Mono<Accreditation> getAccreditation(Integer accreditationId);
+	Mono<Accreditation> saveAccreditation(Integer sellingPointId, Double amount);
 
 }

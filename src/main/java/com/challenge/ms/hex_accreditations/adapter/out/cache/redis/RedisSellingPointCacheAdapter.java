@@ -6,12 +6,12 @@ import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import com.challenge.ms.hex_accreditations.application.domain.model.SellingPoint;
-import com.challenge.ms.hex_accreditations.application.port.out.SellingPointCachePort;
+import com.challenge.ms.hex_accreditations.application.port.out.SellingPointCacheOuputPort;
 
 import reactor.core.publisher.Mono;
 
 @Component
-public class RedisSellingPointCacheAdapter implements SellingPointCachePort {
+public class RedisSellingPointCacheAdapter implements SellingPointCacheOuputPort {
 
 	private final ReactiveRedisTemplate<String, SellingPoint> redisTemplate;
 	private static final Logger logger = LoggerFactory.getLogger(RedisSellingPointCacheAdapter.class);

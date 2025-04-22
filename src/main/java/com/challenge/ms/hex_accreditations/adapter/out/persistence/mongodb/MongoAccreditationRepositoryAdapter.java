@@ -5,12 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.challenge.ms.hex_accreditations.application.domain.model.Accreditation;
-import com.challenge.ms.hex_accreditations.application.port.out.AccreditationRepositoryPort;
+import com.challenge.ms.hex_accreditations.application.port.out.AccreditationRepositoryOuputPort;
 
 import reactor.core.publisher.Mono;
 
 @Component
-public class MongoAccreditationRepositoryAdapter implements AccreditationRepositoryPort {
+public class MongoAccreditationRepositoryAdapter implements AccreditationRepositoryOuputPort {
 
 	private final MongoAccreditationRepository mongoAccreditationRepository;
 

@@ -2,20 +2,23 @@ accreditations-service/
 ├── src/main/java/com/challenge/ms/hex_accreditations/
 │   ├── adapter/
 │   │   ├── in/
-│   │   │   ├── model/
-│   │   │   └── web/      # Controlador
+│   │   │   ├── model/			# SaveAccreditationRequest
+│   │   │   └── web/			# AccreditationController
 │   │   ├── out/
-│   │   │   ├── model/
-│   │   │   ├── persistence/ # Adaptadores para MongoDB
-│   │   │   └── cache/       # Adaptadores para Redis
+│   │   │   ├── model/			
+│   │   │   │	├── persistence/ 	# MongoAccreditationEntity
+│   │   │   │	└── cache/       	# RedisTemplateConfig
+│	│	│	├── cache/redis			#	
+│	│	│	└── persistence/mongodb	# AccreditationMongoMapper, MongoAccreditationRepository, MongoAccreditationRepositoryAdapter
+│	│	│ 
 │   ├── application/
 │   │   ├── domain/
-│   │   │   ├── model/    # Accreditation (entidad del dominio)
-│   │   │   └── service/  # implementaciones de negocio, SaveAccreditationInteractor (casos de uso)
+│   │   │   ├── model/    # Accreditation, SellingPoint
+│   │   │   └── service/  # GetAccreditationInteractor, SaveAccreditationInteractor
 │   │   └── port/
-│   │   │   ├── in/       # casos de uso
-│   │   │   └── out/      # puertos
-│   └── ...
+│   │   │   ├── in/       # GetAccreditationUseCase, SaveAccreditationUseCase 
+│   │   │   └── out/      # AccreditationRepositoryPort, SellingPointCachePort
+│   └── HexApplication
 └── src/main/resources/
 └── src/test/java/
 └── pom.xml

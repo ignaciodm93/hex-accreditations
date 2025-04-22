@@ -3,17 +3,17 @@ package com.challenge.ms.hex_accreditations.application.domain.service;
 import org.springframework.stereotype.Service;
 
 import com.challenge.ms.hex_accreditations.application.domain.model.Accreditation;
-import com.challenge.ms.hex_accreditations.application.port.in.GetAccreditationUseCase;
-import com.challenge.ms.hex_accreditations.application.port.out.AccreditationRepositoryPort;
+import com.challenge.ms.hex_accreditations.application.port.in.GetAccreditationInputPort;
+import com.challenge.ms.hex_accreditations.application.port.out.AccreditationRepositoryOuputPort;
 
 import reactor.core.publisher.Mono;
 
 @Service
-public class GetAccreditationInteractor implements GetAccreditationUseCase {
+public class GetAccreditationInteractor implements GetAccreditationInputPort {
 
-	private final AccreditationRepositoryPort accreditationRepositoryPort;
+	private final AccreditationRepositoryOuputPort accreditationRepositoryPort;
 
-	public GetAccreditationInteractor(AccreditationRepositoryPort accreditationRepositoryPort) {
+	public GetAccreditationInteractor(AccreditationRepositoryOuputPort accreditationRepositoryPort) {
 		this.accreditationRepositoryPort = accreditationRepositoryPort;
 	}
 

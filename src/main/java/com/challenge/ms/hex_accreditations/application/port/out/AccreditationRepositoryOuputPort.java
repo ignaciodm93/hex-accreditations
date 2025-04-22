@@ -4,7 +4,7 @@ import com.challenge.ms.hex_accreditations.application.domain.model.Accreditatio
 
 import reactor.core.publisher.Mono;
 
-public interface AccreditationRepositoryPort {
+public interface AccreditationRepositoryOuputPort {
 
 	Mono<Accreditation> findByAccreditationId(Integer accreditationId);
 

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.challenge.ms.hex_accreditations.adapter.in.model.SaveAccreditationRequest;
 import com.challenge.ms.hex_accreditations.application.domain.model.Accreditation;
-import com.challenge.ms.hex_accreditations.application.port.in.GetAccreditationUseCase;
-import com.challenge.ms.hex_accreditations.application.port.in.SaveAccreditationUseCase;
+import com.challenge.ms.hex_accreditations.application.port.in.GetAccreditationInputPort;
+import com.challenge.ms.hex_accreditations.application.port.in.SaveAccreditationInputPort;
 
 import reactor.core.publisher.Mono;
 
@@ -24,11 +24,11 @@ public class AccreditationController {
 	private static final String SAVE_ACCREDITATION_ERROR_MESSAGE = "The requested selling point was not found on redis cache. PLease update cache and try again.";
 	private static final String ERROR_REASON_HEADER = "Error-Reason";
 
-	private final GetAccreditationUseCase getAccreditationUseCase;
-	private final SaveAccreditationUseCase saveAccreditationUseCase;
+	private final GetAccreditationInputPort getAccreditationUseCase;
+	private final SaveAccreditationInputPort saveAccreditationUseCase;
 
-	public AccreditationController(GetAccreditationUseCase getAccreditationUseCase,
-			SaveAccreditationUseCase saveAccreditationUseCase) {
+	public AccreditationController(GetAccreditationInputPort getAccreditationUseCase,
+			SaveAccreditationInputPort saveAccreditationUseCase) {
 		this.getAccreditationUseCase = getAccreditationUseCase;
 		this.saveAccreditationUseCase = saveAccreditationUseCase;
 	}
