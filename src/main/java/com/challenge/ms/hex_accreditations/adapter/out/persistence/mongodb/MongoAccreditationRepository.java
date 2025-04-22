@@ -1,4 +1,4 @@
-package com.challenge.ms.hex_accreditations.adapter.out.persistence.mongodb.repository;
+package com.challenge.ms.hex_accreditations.adapter.out.persistence.mongodb;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 

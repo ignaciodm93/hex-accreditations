@@ -1,9 +1,9 @@
 package com.challenge.ms.hex_accreditations.adapter.out.persistence.mongodb;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.challenge.ms.hex_accreditations.adapter.out.model.persistence.MongoAccreditationEntity;
-import com.challenge.ms.hex_accreditations.adapter.out.persistence.mongodb.repository.MongoAccreditationRepository;
 import com.challenge.ms.hex_accreditations.application.domain.model.Accreditation;
 import com.challenge.ms.hex_accreditations.application.port.out.AccreditationRepositoryPort;
 
@@ -14,29 +14,22 @@ public class MongoAccreditationRepositoryAdapter implements AccreditationReposit
 
 	private final MongoAccreditationRepository mongoAccreditationRepository;
 
+	private static final Logger logger = LoggerFactory.getLogger(MongoAccreditationRepositoryAdapter.class);
+
 	public MongoAccreditationRepositoryAdapter(MongoAccreditationRepository mongoAccreditationRepository) {
 		this.mongoAccreditationRepository = mongoAccreditationRepository;
 	}
 
 	@Override
 	public Mono<Accreditation> findByAccreditationId(Integer accreditationId) {
-		// revisar
-		return mongoAccreditationRepository.findBySellingPointId(accreditationId).map(this::toDomain);
+		return mongoAccreditationRepository.findBySellingPointId(accreditationId)
+				.map(AccreditationMongoMapper::fromDbtoDomainModel);
 	}
 
 	@Override
 	public Mono<Accreditation> save(Accreditation accreditation) {
-		return mongoAccreditationRepository.save(toEntity(accreditation)).map(this::toDomain);
-	}
-
-	// pasar a un mapper
-	private Accreditation toDomain(MongoAccreditationEntity entity) {
-		return new Accreditation(entity.getId(), entity.getAmount(), entity.getSellingPointId(),
-				entity.getSellingPointName(), entity.getReceptionDate());
-	}
-
-	private MongoAccreditationEntity toEntity(Accreditation accreditation) {
-		return new MongoAccreditationEntity(accreditation.getAmount(), accreditation.getSellingPointId(),
-				accreditation.getSellingPointName(), accreditation.getReceptionDate());
+		logger.info("save");
+		return mongoAccreditationRepository.save(AccreditationMongoMapper.fromDomainToDbModel(accreditation))
+				.map(AccreditationMongoMapper::fromDbtoDomainModel);
 	}
 }

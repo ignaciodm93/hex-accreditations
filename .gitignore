@@ -8,3 +8,4 @@ target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 *.class
 .classpath
 .project
+*.lst

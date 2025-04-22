@@ -20,6 +20,10 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/accreditations")
 public class AccreditationController {
 
+	private static final String GET_ACCREDITATION_ERROR_MESSAGE = "The requested selling point was not found on mongo. Please try another identifier.";
+	private static final String SAVE_ACCREDITATION_ERROR_MESSAGE = "The requested selling point was not found on redis cache. PLease update cache and try again.";
+	private static final String ERROR_REASON_HEADER = "Error-Reason";
+
 	private final GetAccreditationUseCase getAccreditationUseCase;
 	private final SaveAccreditationUseCase saveAccreditationUseCase;
 
@@ -32,12 +36,15 @@ public class AccreditationController {
 	@GetMapping("/{id}")
 	public Mono<ResponseEntity<Accreditation>> getAccreditation(@PathVariable Integer id) {
 		return getAccreditationUseCase.getAccreditation(id).map(accreditation -> ResponseEntity.ok(accreditation))
-				.switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+				.switchIfEmpty(Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.header(ERROR_REASON_HEADER, GET_ACCREDITATION_ERROR_MESSAGE).build()));
 	}
 
 	@PostMapping
-	public Mono<ResponseEntity<?>> saveAccreditation(@RequestBody SaveAccreditationRequest request) {
+	public Mono<ResponseEntity<Accreditation>> saveAccreditation(@RequestBody SaveAccreditationRequest request) {
 		return saveAccreditationUseCase.saveAccreditation(request.getSellingPointId(), request.getAmount())
-				.map(accreditation -> ResponseEntity.status(HttpStatus.CREATED).body(accreditation));
+				.map(accreditation -> ResponseEntity.status(HttpStatus.CREATED).body(accreditation))
+				.switchIfEmpty(Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.header(ERROR_REASON_HEADER, SAVE_ACCREDITATION_ERROR_MESSAGE).build()));
 	}
 }
