@@ -6,9 +6,6 @@ import com.challenge.ms.hex_accreditations.application.domain.model.Accreditatio
 public class AccreditationMongoMapper {
 
 	public static Accreditation fromDbtoDomainModel(MongoAccreditationEntity dbEntity) {
-		if (dbEntity == null) {
-			return null;
-		}
 		return new Accreditation(dbEntity.getId(), dbEntity.getAmount(), dbEntity.getSellingPointId(),
 				dbEntity.getSellingPointName(), dbEntity.getReceptionDate());
 	}

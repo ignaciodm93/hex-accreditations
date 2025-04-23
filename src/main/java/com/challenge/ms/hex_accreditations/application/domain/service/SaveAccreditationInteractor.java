@@ -14,12 +14,12 @@ import reactor.core.publisher.Mono;
 @Service
 public class SaveAccreditationInteractor implements SaveAccreditationInputPort {
 
-	private final AccreditationRepositoryOuputPort accreditationRepositoryPort;
+	private final AccreditationRepositoryOuputPort accreditationRepositoryOutputPort;
 	private final SellingPointCacheOuputPort sellingPointCachePort;
 
 	public SaveAccreditationInteractor(AccreditationRepositoryOuputPort accreditationRepositoryPort,
 			SellingPointCacheOuputPort sellingPointCachePort) {
-		this.accreditationRepositoryPort = accreditationRepositoryPort;
+		this.accreditationRepositoryOutputPort = accreditationRepositoryPort;
 		this.sellingPointCachePort = sellingPointCachePort;
 	}
 
@@ -28,7 +28,7 @@ public class SaveAccreditationInteractor implements SaveAccreditationInputPort {
 		return sellingPointCachePort.findSellingPointById(sellingPointId).flatMap(sellingPoint -> {
 			Accreditation accreditation = new Accreditation(null, amount, sellingPoint.getId(), sellingPoint.getName(),
 					LocalDateTime.now());
-			return accreditationRepositoryPort.save(accreditation);
+			return accreditationRepositoryOutputPort.save(accreditation);
 		}).switchIfEmpty(Mono.empty());
 	}
 }

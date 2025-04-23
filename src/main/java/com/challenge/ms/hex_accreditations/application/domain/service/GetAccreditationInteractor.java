@@ -11,14 +11,14 @@ import reactor.core.publisher.Mono;
 @Service
 public class GetAccreditationInteractor implements GetAccreditationInputPort {
 
-	private final AccreditationRepositoryOuputPort accreditationRepositoryPort;
+	private final AccreditationRepositoryOuputPort accreditationRepositoryOutputPort;
 
-	public GetAccreditationInteractor(AccreditationRepositoryOuputPort accreditationRepositoryPort) {
-		this.accreditationRepositoryPort = accreditationRepositoryPort;
+	public GetAccreditationInteractor(AccreditationRepositoryOuputPort accreditationRepositoryOutputPort) {
+		this.accreditationRepositoryOutputPort = accreditationRepositoryOutputPort;
 	}
 
 	@Override
 	public Mono<Accreditation> getAccreditation(Integer accreditationId) {
-		return accreditationRepositoryPort.findByAccreditationId(accreditationId);
+		return accreditationRepositoryOutputPort.findByAccreditationId(accreditationId);
 	}
 }
