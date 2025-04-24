@@ -57,11 +57,24 @@
 		</dependencies>
   <build>
     <plugins>
+    <!--autogenerado por la plantilla de maven para los tests-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M5</version>
       </plugin>
-    </plugins>
+      <!--para el maven wrapper-->
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-wrapper-plugin</artifactId>
+      <version>3.2.0</version>
+    </plugin>
+    <!--para que incluya la clase run en el manifest-->
+    <plugin>
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-maven-plugin</artifactId>
+       <version>3.4.2</version>
+     </plugin>
+  </plugins>
   </build>
 </project>
