@@ -1,9 +1,12 @@
 package com.challenge.ms.hex_accreditations.adapter.out.persistence.mongodb;
 
+import java.util.Comparator;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.challenge.ms.hex_accreditations.adapter.out.model.persistence.MongoAccreditationEntity;
 import com.challenge.ms.hex_accreditations.application.domain.model.Accreditation;
 import com.challenge.ms.hex_accreditations.application.port.out.AccreditationRepositoryOuputPort;
 
@@ -23,6 +26,7 @@ public class MongoAccreditationRepositoryAdapter implements AccreditationReposit
 	@Override
 	public Mono<Accreditation> findByAccreditationId(Integer accreditationId) {
 		return mongoAccreditationRepository.findBySellingPointId(accreditationId)
+				.sort(Comparator.comparing(MongoAccreditationEntity::getReceptionDate).reversed()).next()
 				.map(AccreditationMongoMapper::fromDbtoDomainModel);
 	}
 

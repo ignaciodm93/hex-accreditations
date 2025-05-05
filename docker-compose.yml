@@ -1,7 +1,7 @@
 services:
   hex-accreditations:
-    image: hex-accreditations
-    container_name: accreditations
+    image: accreditations
+    container_name: accreditations-container
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/selling_points_db
       - SPRING_DATA_REDIS_HOST=redis
